@@ -1,101 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Date List with Sorting</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  h2 {
-    margin-bottom: 10px;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    background: #f0f0f0;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  button {
-    margin: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-  }
-  button:hover {
-    background-color: #45a049;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date List with Sorting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f0f0f0;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>Date List</h2>
-<button onclick="sortAscending()">Sort Ascending</button>
-<button onclick="sortDescending()">Sort Descending</button>
-<ul id="dateList"></ul>
+  <h2>Date List</h2>
+  <button onclick="sortAscending()">Sort Ascending</button>
+  <button onclick="sortDescending()">Sort Descending</button>
+  <ul id="dateList"></ul>
 
-<script>
-function getRandomDate(startYear=2020, endYear=2025) {
-    const start = new Date(startYear, 0, 1).getTime();
-    const end = new Date(endYear, 11, 31).getTime();
-    const randomTime = start + Math.random() * (end - start);
-    const date = new Date(randomTime);
-    
-    // Format date as "1-Jan-2022"
-    const day = date.getDate();
-      
-    const month = monthNames[date.getMonth()];
-    const year = date.getFullYear();
-    
-    // Format time as "22:22:22"
-    const hours = String(date.getHours()).padStart(2,'0');
-    const minutes = String(date.getMinutes()).padStart(2,'0');
-    const seconds = String(date.getSeconds()).padStart(2,'0');
-    
-    return {dateStr: `${day}-${month}-${year}`, timeStr: `${hours}:${minutes}:${seconds}`, timestamp: date.getTime()};
-}
+  <script>
+    function getRandomDate(startYear = 2020, endYear = 2025) {
+      const start = new Date(startYear, 0, 1).getTime();
+      const end = new Date(endYear, 11, 31).getTime();
+      const randomTime = start + Math.random() * (end - start);
+      const date = new Date(randomTime);
 
-let dates = [];
-function generateDates(num=10) {
-    dates = [];
-    for(let i=0;i<num;i++){
-        dates.push(getRandomDate());
+      // Format date as "1-Jan-2022"
+      const day = date.getDate();
+
+      const month = monthNames[date.getMonth()];
+      const year = date.getFullYear();
+
+      // Format time as "22:22:22"
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+
+      return { dateStr: `${day}-${month}-${year}`, timeStr: `${hours}:${minutes}:${seconds}`, timestamp: date.getTime() };
     }
-    renderDates();
-}
 
-function renderDates() {
-    const list = document.getElementById("dateList");
-    list.innerHTML = "";
-    dates.forEach(d => {
+    let dates = [];
+    function generateDates(num = 10) {
+      dates = [];
+      for (let i = 0; i < num; i++) {
+        dates.push(getRandomDate());
+      }
+      renderDates(); ssasa
+    }
+
+    function renderDates() {
+      const list = document.getElementById("dateList");
+      list.innerHTML = "";
+      dates.forEach(d => {
         const li = document.createElement("li");
         li.textContent = `${d.dateStr} ${d.timeStr}`;
         list.appendChild(li);
-    });
-}
+      });
+    }
 
-function sortAscending() {
-    dates.sort((a,b) => a.timestamp - b.timestamp);
-    renderDates();
-}
+    function sortAscending() {
+      dates.sort((a, b) => a.timestamp - b.timestamp);
+      renderDates();
+    }
 
-function sortDescending() {
-    dates.sort((a,b) => b.timestamp - a.timestamp);
-    renderDates();
-}
+    function sortDescending() {
+      dates.sort((a, b) => b.timestamp - a.timestamp);
+      renderDates();
+    }
 
-// Generate random dates on page load
-generateDates(10);
-</script>
+    // Generate random dates on page load
+    generateDates(10);
+  </script>
 
 </body>
+
 </html>
